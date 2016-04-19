@@ -1,3 +1,7 @@
+## Ignore these files & directories
 .DS_Store
-crostoli.json
+
 lib/config/
+__pycache__
+
+
