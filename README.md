@@ -18,6 +18,6 @@ An ETL program, written in `python3`. The spiritual successor to (etl)[github.co
 -- `python3 extract.py file.py && (python3 extract.py dependent_load_first.py ; python3 extract.py dependent_load_second.py)`
 
 ## TO DO
-[ ] use `if __name__ == '__main__'`
-[ ] make the script take an argument, a sql file, as the file to parse & execute
+- [ ] use `if __name__ == '__main__'`
+- [ ] make the script take an argument, a sql file, as the file to parse & execute
 
