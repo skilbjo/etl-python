@@ -13,7 +13,6 @@ An ETL program, written in `python3`. The spiritual successor to (etl)[github.co
 - Write new dependencies`pip freeze > requirements.txt`
 
 ## WORKFLOW
-- 
 - cron: `0 20 * * * cd $TXN ; python3 extract.py transaction.sql >/dev/null`
 - if necessary, add dependency loads via `bash` subshells & bash workflow, ie:
 -- `python3 extract.py file.py && (python3 extract.py dependent_load_first.py ; python3 extract.py dependent_load_second.py)`
