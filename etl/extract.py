@@ -2,23 +2,24 @@ import configparser
 config = configparser.ConfigParser()
 config.read('./lib/config/config')
 
-def extract(server,extract):
-	read(server, extract)
+def extract(server, sql_file):
+	sql = read(sql_file)
+	return execute(server, sql)
 
-def read(server, extract):
+def read(sql_load):
 	sql=''
-	with open(extract,'r') as f:
+	with open(sql_load,'r') as f:
 		for line in f:
 			sql+=line
-	execute(server,sql)
+	return sql
 
 def execute(server, sql):
 	if(server == 'crostoli'):
-		crostoli(sql)
+		return crostoli(sql)
 	elif(server == 'finance_costs'):
-		finance_costs(sql)
+		return finance_costs(sql)
 	elif(server == 'finance_dm'):
-		finance_dm(sql)
+		return finance_dm(sql)
 
 def crostoli(sql, cb=''):
 	import pymssql
@@ -28,12 +29,6 @@ def crostoli(sql, cb=''):
 		config.get('crostoli','passwd')
 	)
 	data=[]
-
-	# cursor = conn.cursor(as_dict=True)
-	# cursor.execute(sql)
-	# for row in cursor:
-	# 	data.append(row)
-	# conn.close()
 
 	cursor = conn.cursor()
 	cursor.execute(sql)
@@ -59,7 +54,8 @@ def finance_dm(sql):
 	for row in cursor:
 		data.append(row)
 	conn.close()
-	transform(data)
+
+	return data
 
 
 def finance_costs(sql):
@@ -71,14 +67,15 @@ def finance_costs(sql):
 		user			=	config.get('finance_costs','user'), 
 		password	= config.get('finance_costs','passwd')
 	)
-	cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 	data=[]
 
+	cursor = conn.cursor()
 	cursor.execute(sql)
 	for row in cursor:
-		data.append(dict(row))
-	conn.close()	
-	transform(data)
+		data.append(row)
+	conn.close()
+
+	return data
 
 
 

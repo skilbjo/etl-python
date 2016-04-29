@@ -16,5 +16,5 @@ insert into analytics_test (
 	Card_Txn_Count,
 	Card_Volume_USD
 ) values (
-	%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
+	$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16
 )
