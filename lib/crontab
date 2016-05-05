@@ -1,18 +1,23 @@
 ##### VARIABLES #####
-	#PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
-	PATH=/home/skilbjo/.virtualenvs/etl/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
-	#SHELL=/bin/bash
+	PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
 	ACTIVATE="/home/skilbjo/.virtualenvs/etl/bin/activate"
 	MAILTO=jskilbeck@yapstone.com
+
 	APP="/home/skilbjo/python/app/etl"
-	ANALYTICS="/home/skilbjo/python/app/etl/sql/Analytics/"
+
+#	ANALYTICS="/home/skilbjo/python/app/etl/sql/Analytics/"
+	ANALYTICS="$APP/sql/Analytics/"
 	MMF="/home/skilbjo/python/app/etl/sql/Analytics/"
 	MPR="/home/skilbjo/python/app/etl/sql/MPR/"	
 	TOPDATA="/home/skilbjo/python/app/etl/sql/TopData/"
 
+	#PATH=/home/skilbjo/.virtualenvs/etl/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
+
+
 ##### Monthly #####
 	## Analytics
-		45 16 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
+		50 16 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "$ANALYTICSload_analytics.sql" >/dev/null
+#		45 16 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
 
 	## TopData
 		58 15 5 * * skilbjo /home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
