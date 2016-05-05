@@ -15,5 +15,5 @@
 	## MPR
 
 	## MMF
-		25 15 5 * * skilbjo cd $APP ; python etl.py -e crostoli -e $TOPDATAmmf.py -l $TOPDATAload_mmf.py >/dev/null
+		28 15 5 * * skilbjo cd $APP ; workon etl ; python etl.py -e crostoli -e $TOPDATAmmf.py -l $TOPDATAload_mmf.py >/dev/null
 
