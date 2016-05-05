@@ -8,11 +8,12 @@
 	MMF=$APP"/sql/Analytics/"
 	MPR=$APP"/sql/MPR/"	
 	TOPDATA=$APP"/sql/TopData/"
+	WORKON_HOME=~/.virtualenvs
 
 
 ##### Monthly #####
 	## Analytics
-		21 16 5 * * root source	/home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $ANALYTICSanalytics.sql -l $ANALYTICSload_analytics.sql >/dev/null
+		27 16 5 * * skilbjo source	/home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $ANALYTICSanalytics.sql -l $ANALYTICSload_analytics.sql >/dev/null
 
 	## TopData
 		58 15 5 * * skilbjo /home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
