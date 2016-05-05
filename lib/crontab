@@ -12,7 +12,7 @@
 
 ##### Monthly #####
 	## Analytics
-		41 16 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
+		45 16 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
 
 	## TopData
 		58 15 5 * * skilbjo /home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
