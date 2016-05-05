@@ -1,2 +1,7 @@
+petl==1.1.0
 psycopg2==2.6.1
 pymssql==2.1.2
+petl==1.1.0
+psycopg2==2.6.1
+pymssql==2.1.2
+SQLAlchemy==1.0.12

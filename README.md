@@ -12,6 +12,15 @@ An ETL program, written in `python3`. The spiritual successor to (etl)[github.co
 - And, for installed dependencies, `pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U`
 - Write new dependencies`pip freeze > requirements.txt`
 
+## DEPLOYMENT ON CENTOS
+		# yum install python pip python3
+		# pip install virtualenvwrapper
+		# mkvirtualenv -p $(which python3) etl
+		# source ~/.virtualenvs/etl/bin/activate
+
+		local@skilbjo $ git remote add finance	ssh://skilbjo@finance.server.int/~/python/git/etl.git 
+
+
 ## USAGE
 To run a query, call the `etl.py` file from python3. The three command-line flags are `-s, --server`,'`-e,--extract`, and `-l,--load`.
 
