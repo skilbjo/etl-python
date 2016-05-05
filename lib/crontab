@@ -4,7 +4,7 @@
 	SHELL=/bin/bash
 	MAILTO=jskilbeck@yapstone.com
 	APP="/home/skilbjo/python/app/etl"
-	ANALYTICS=$APP"/sql/Analytics/"
+	ANALYTICS="${APP}/sql/Analytics/"
 	MMF=$APP"/sql/Analytics/"
 	MPR=$APP"/sql/MPR/"	
 	TOPDATA=$APP"/sql/TopData/"
@@ -13,7 +13,7 @@
 
 ##### Monthly #####
 	## Analytics
-		34 16 5 * * skilbjo source	/home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
+		35 16 5 * * skilbjo source	/home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
 
 	## TopData
 		58 15 5 * * skilbjo /home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
