@@ -4,14 +4,17 @@ APP=etl
 DEPLOYDIR=~/python/app/$APP
 CRONDIR=/etc/cron.d
 
+
 GIT_WORK_TREE="$DEPLOYDIR" git checkout -f
 
 cd "$DEPLOYDIR"
+
+sudo cp lib/crontab $CRONDIR/$APP"python"
 
 . ~/.virtualenvs/etl/bin/activate
 
 pip install -r requirements.txt
 
-sudo cp lib/crontab $CRONDIR/$APP"python"
+
 
 echo 'All done :D'

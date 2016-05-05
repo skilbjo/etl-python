@@ -20,4 +20,4 @@
 		0 20 10 * * skilbjo cd $APP"/MPR" ; node mpr.js >/dev/null
 
 	## MMF
-		17 15 5 * * skilbjo cd $APP ; python etl.py -e crostoli -e $TOPDATAmmf.py -l $TOPDATAload_mmf.py >/dev/null
+		21 15 5 * * skilbjo cd $APP ; python etl.py -e crostoli -e $TOPDATAmmf.py -l $TOPDATAload_mmf.py >/dev/null
