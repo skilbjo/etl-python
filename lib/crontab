@@ -1,6 +1,7 @@
 ##### VARIABLES #####
 	#PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
 	PATH=/home/skilbjo/.virtualenvs/etl/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
+	SHELL=/bin/bash
 	MAILTO=jskilbeck@yapstone.com
 	APP="/home/skilbjo/python/app/etl"
 	ANALYTICS=$APP"/sql/Analytics/"
@@ -11,7 +12,7 @@
 
 ##### Monthly #####
 	## Analytics
-		07 16 5 * * skilbjo cd $APP ; workon etl ; python etl.py -s crostoli -e $ANALYTICSanalytics.sql -l $ANALYTICSload_analytics.sql >/dev/null
+		8 16 5 * * skilbjo cd $APP ; workon etl ; python etl.py -s crostoli -e $ANALYTICSanalytics.sql -l $ANALYTICSload_analytics.sql >/dev/null
 
 	## TopData
 		58 15 5 * * skilbjo cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
