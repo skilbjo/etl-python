@@ -1,23 +1,23 @@
 ##### VARIABLES #####
 	PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
 	MAILTO=jskilbeck@yapstone.com
-	JOBS="/home/skilbjo/node/app/etl/jobs"
+	APP="/home/skilbjo/python/app/etl"
+	ANALYTICS=$APP"/sql/Analytics/"
+	MMF=$APP"/sql/Analytics/"
+	TOPDATA=$APP"/sql/TopData/"
 
-##### Daily #####
-	## Transaction
-		# 25 12 7 * * skilbjo cd $JOBS"/Transaction" ; node load_transaction.js >/dev/null
 
 ##### Monthly #####
 	## TopData
-		0 20 5 * * skilbjo cd $JOBS"/Analytics" ; node analytics.js >/dev/null
+		0 20 5 * * skilbjo cd $APP"/Analytics" ; python etl.py -S crostoli  >/dev/null
 
 	## Analytics
-		0 20 10 * * skilbjo cd $JOBS"/TopData" ; node top_data.js >/dev/null		
+		0 20 10 * * skilbjo cd $APP"/TopData" ; node top_data.js >/dev/null		
 
 	## MPR
 		# can you do this with a subshell?
-		0 16 10 * * skilbjo cd $JOBS"/MPR" ; node mpr_base.js >/dev/null	
-		0 20 10 * * skilbjo cd $JOBS"/MPR" ; node mpr.js >/dev/null
+		0 16 10 * * skilbjo cd $APP"/MPR" ; node mpr_base.js >/dev/null	
+		0 20 10 * * skilbjo cd $APP"/MPR" ; node mpr.js >/dev/null
 
 	## MMF
-		0 20 10 * * skilbjo cd $JOBS"/MMF" ; node mmf.js >/dev/null
+		17 15 5 * * skilbjo cd $APP ; python etl.py -e crostoli -e $TOPDATAmmf.py -l $TOPDATAload_mmf.py >/dev/null
