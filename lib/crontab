@@ -12,13 +12,13 @@
 
 ##### Monthly #####
 	## Analytics
-		12 16 5 * * skilbjo 	./home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $ANALYTICSanalytics.sql -l $ANALYTICSload_analytics.sql >/dev/null
+		13 16 5 * * skilbjo 	/home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $ANALYTICSanalytics.sql -l $ANALYTICSload_analytics.sql >/dev/null
 
 	## TopData
-		58 15 5 * * skilbjo ./home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
+		58 15 5 * * skilbjo /home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $TOPDATAtop_data.sql -l $TOPDATAload_top_data.sql >/dev/null
 
 	## MPR
-		28 15 5 * * skilbjo ./home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $MPRmpr.sql -l $MPRload_mpr.sql >/dev/null
+		28 15 5 * * skilbjo /home/skilbjo/.virtualenvs/etl/bin/activate ; cd $APP ; workon etl ; python etl.py -s crostoli -e $MPRmpr.sql -l $MPRload_mpr.sql >/dev/null
 
 	## MMF
 		28 15 5 * * skilbjo cd $APP ; workon etl ; python etl.py -s crostoli -e $MMFmmf.sql -l $MMFload_mmf.sql >/dev/null
