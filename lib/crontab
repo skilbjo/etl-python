@@ -22,5 +22,5 @@
 		08 17 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}top_data.sql" -l "${MPR}load_top_data.sql" >/dev/null
 
 	## MMF
-		12 17 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
+		19 17 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
 
