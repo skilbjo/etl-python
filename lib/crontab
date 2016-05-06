@@ -17,13 +17,14 @@
 		25 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
 
 	## TopData
-		25 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
+		47 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
 
 	## MPR
-		08 17 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}top_data.sql" -l "${MPR}load_top_data.sql" >/dev/null
+		30 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null
+		0 11 8 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr.sql" -l "${MPR}load_mpr.sql" >/dev/null
 
 	## MMF
-		25 11 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
+		30 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
 
 	## External Gateway
 		12 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${EXTNRLGTWY}extrnlgtwy.sql" -l "${EXTNRLGTWY}load_extrnlgtwy.sql" >/dev/null		
