@@ -1,4 +1,4 @@
-insert into analytics_test (
+insert into analytics (
 	Year,
 	Month,
 	Date,
