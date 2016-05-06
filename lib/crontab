@@ -26,5 +26,5 @@
 		19 17 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
 
 	## External Gateway
-		10 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${EXTNRLGTWY}extrnlgtwy.sql" -l "${EXTNRLGTWY}load_extrnlgtwy.sql" >/dev/null		
+		12 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${EXTNRLGTWY}extrnlgtwy.sql" -l "${EXTNRLGTWY}load_extrnlgtwy.sql" >/dev/null		
 
