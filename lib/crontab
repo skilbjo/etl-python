@@ -9,6 +9,7 @@
 	MMF="/home/skilbjo/python/app/etl/sql/MMF/"
 	MPR="/home/skilbjo/python/app/etl/sql/MPR/"	
 	TOPDATA="/home/skilbjo/python/app/etl/sql/TopData/"
+	EXTNRLGTWY="/home/skilbjo/python/app/etl/sql/ExtrnlGtwy/"	
 
 
 ##### Monthly #####
@@ -23,4 +24,7 @@
 
 	## MMF
 		19 17 5 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
+
+	## External Gateway
+		3 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${EXTRNLGTWY}extrnlgtwy.sql" -l "${EXTRNLGTWY}load_extrnlgtwy.sql" >/dev/null		
 
