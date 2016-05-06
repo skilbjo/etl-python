@@ -1,4 +1,4 @@
-insert into extrnlgtwy (
+insert into external_gateway (
 	Year,
 	Month,
 	Date,
