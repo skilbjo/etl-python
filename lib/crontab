@@ -17,7 +17,7 @@
 		25 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
 
 	## TopData
-		47 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
+		49 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
 
 	## MPR
 		30 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null

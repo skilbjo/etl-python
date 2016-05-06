@@ -2,8 +2,10 @@
 declare @now as date, @start as date, @end as date 
 
 set @now = getdate()
-set @start = '2012-01-01'--'2015-01-01'--dateadd(mm,(year(@now)- 1900) * 12 + month(@now) - 1 -1 , 0) 
-set @end = '2014-12-31'--dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))  --'2014-12-31'--dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))   
+set @start = dateadd(mm,(year(@now)- 1900) * 12 + month(@now) - 1 -1 , 0) 
+set @end = dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))  --'2014-12-31'--dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))   
+-- set @start = '2012-01-01'--'2015-01-01'--dateadd(mm,(year(@now)- 1900) * 12 + month(@now) - 1 -1 , 0) 
+-- set @end = '2014-12-31'--dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))  --'2014-12-31'--dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))   
 
 if object_id('tempdb..#Billing') is not null drop table #Billing
 select * into #Billing from (
