@@ -1,19 +1,19 @@
-with Date as ( 
+with Date as (
 	select (date_trunc('Month',current_date) - interval '1 day')::DATE as StartDate
 ),
 COGS as (
-	select 'Dues' Vertical,	1.97 Credit,	0.35 Debit,	1.19 Blend ,	0.03 Amex,	0.03 ACH union
-	select 'Inn' , 	1.95 ,	0.44 ,	1.65 ,	0.03 ,	0.03 union
-	select 'Rent' , 	2.02 ,	0.38 ,	1.13 ,	0.03 ,	0.03 union
-	select 'VRP' , 	1.87 ,	0.38 ,	1.5 ,	0.03 ,	0.03 union
-	select 'SRP' , 	2.1 ,	0.73 ,	1.18 ,	0.03 ,	0.03 union
-	select 'HA' , 	1.9 ,	0.37 ,	1.64 ,	0.03 ,	0.03 union
-	select 'NonProfit' , 	2.48 ,	1.02 ,	2.26 ,	0.03 ,	0.03 union
-	select  'HA-Intl', 	1.9 ,	0.4 ,	1.43 ,	null ,	null
-), 
+	select 'Dues' Vertical,	1.98 Credit,	0.35 Debit,	1.25 Blend ,	2.29 Amex,	0.03 ACH union
+	select 'Inn' , 	1.98 ,	0.47 ,	1.72 ,	2.29 ,	0.03 union
+	select 'Rent' , 	2.01 ,	0.39 ,	1.1 ,	2.29 ,	0.03 union
+	select 'VRP' , 	1.85 ,	0.38 ,	1.51 ,	2.9 ,	0.03 union
+	select 'SRP' , 	2.13 ,	0.74 ,	1.2 ,	2.29 ,	0.03 union
+	select 'HA' , 	1.4 ,	0.18 ,	1.13 ,	2.9 ,	0.03 union
+	select 'NonProfit' , 	2.49 ,	1.02 ,	2.28 ,	2.29 ,	0.03 union
+	select  'HA-Intl', 	1.9 ,	0.4 ,	1.41 ,	null ,	null
+),
 Allocable_Card_Volume as (
 	select MPR.Date, sum(MPR.Card_Volume_Net_USD)  Allocable_Card_Volume
-	from  mpr_base MPR  
+	from  mpr_base MPR 
 	where MPR.Gateway in ('YapProcessing') and MPR.Vertical not in ('HA-Intl','HA')
 	group by MPR.Date
 ),
@@ -56,18 +56,19 @@ COGS_Financials_Base as (
 	select '2015-12-31'::DATE Date , 7849861 Total_COGS , 3301992 Homeaway , (select Allocable_Card_Volume from Allocable_Card_Volume where Date in ('2015-12-31') ) Allocable_Card_Volume union
 	select '2016-01-31'::DATE Date , 10455477 Total_COGS , 4733567 Homeaway , (select Allocable_Card_Volume from Allocable_Card_Volume where Date in ('2016-01-31') ) Allocable_Card_Volume union
 	select '2016-02-29'::DATE Date , 10059903 Total_COGS , 4741161 Homeaway , (select Allocable_Card_Volume from Allocable_Card_Volume where Date in ('2016-02-29') ) Allocable_Card_Volume union
-	select '2016-03-31'::DATE Date , 9426188 Total_COGS , 3818629 Homeaway , (select Allocable_Card_Volume from Allocable_Card_Volume where Date in ('2016-03-31') ) Allocable_Card_Volume 
+	select '2016-03-31'::DATE Date , 9426188 Total_COGS , 3818628 + (237246 / .82 ) Homeaway , (select Allocable_Card_Volume from Allocable_Card_Volume where Date in ('2016-03-31') ) Allocable_Card_Volume union
+	select '2016-04-30'::DATE Date , 8813957 Total_COGS , 3842187 + (-6107 / .82 ) Homeaway , (select Allocable_Card_Volume from Allocable_Card_Volume where Date in ('2016-04-30') ) Allocable_Card_Volume union	
 ),
 Initial_COGS as (
 	select
 		MPR.Date,
 		sum(
-		case 	when 	MPR.PaymentTypeGroup in ('ACH_Scan','AmEx') then (Txn_Count * COGS.ACH) else 0 end +
-		case 	when 	MPR.Vertical not in ('HA') and MPR.PaymentTypeGroup in ('Card','AmEx-Processing') then
-								coalesce( ((Credit_Card_Net_USD - Amex_Processing_Net_USD) * COGS.Credit * 0.01),0) + coalesce((Debit_Card_Net_USD * COGS.Debit * 0.01),0) + coalesce((Amex_Processing_Net_USD * COGS.Amex * 0.01),0) + coalesce((case when TPV is null and PaymentTypeGroup in ('Card') then TPV_Billing else 0 end * COGS.Blend * 0.01),0)
-					when 	MPR.Vertical in ('HA') and MPR.PaymentTypeGroup in ('Card','AmEx-Processing') and FeePaymentType in ('PropertyPaid') then
-								coalesce(COGS_Financials.Homeaway,0)
-								else 0 end
+		case    when  MPR.PaymentTypeGroup in ('ACH_Scan','AmEx') then (Txn_Count * COGS.ACH) else 0 end +
+		case    when   MPR.Vertical not in ('HA') and MPR.PaymentTypeGroup in ('Card','AmEx-Processing') then
+																																						coalesce( ((Credit_Card_Net_USD - Amex_Processing_Net_USD) * COGS.Credit * 0.01),0) + coalesce((Debit_Card_Net_USD * COGS.Debit * 0.01),0) + coalesce((Amex_Processing_Net_USD * COGS.Amex * 0.01),0) + coalesce((case when TPV is null and PaymentTypeGroup in ('Card') then TPV_Billing else 0 end * COGS.Blend * 0.01),0)
+																				when             MPR.Vertical in ('HA') and MPR.PaymentTypeGroup in ('Card','AmEx-Processing') and FeePaymentType in ('PropertyPaid') then
+																																						coalesce(COGS_Financials.Homeaway,0)
+																																						else 0 end
 		) Initial_COGS
 	from
 		mpr_base MPR
@@ -84,7 +85,7 @@ COGS_Financials as (
 		COGS_Financials_Base
 		join Initial_COGS on COGS_Financials_Base.Date = Initial_COGS.Date
 ),
-MPR_temp as (
+MPR as (
 	select
 		MPR.Date, MPR.PlatformId,MPR.Gateway,MPR.Vertical, MPR.SoftwareName, MPR.ParentAccountId, MPR.ParentName , 
 		MPR.FeePaymentType, MPR.PaymentTypeGroup ,
@@ -98,7 +99,7 @@ MPR_temp as (
 				+(coalesce( ( ( cast(Card_Volume_Net_USD as decimal(18,2) ) / cast(COGS_Financials.Allocable_Card_Volume as decimal(18,2)) ) * COGS_Financials.Allocation  ), 0) ) -- Excess
 						when MPR.Vertical in ('HA') and MPR.PaymentTypeGroup in ('Card','AmEx-Processing') and MPR.FeePaymentType in ('PropertyPaid') then	coalesce(COGS_Financials.Homeaway,0)
 						else 0
-		  end,0)
+			end,0)
 		) COGS_USD,
 		sum(Txn_Count) Txn_Count
 	from
@@ -109,20 +110,19 @@ MPR_temp as (
 		MPR.Date in ( select StartDate from Date ) 
 		and MPR.Vertical not in ('HA-Intl')
 	group by
-	    MPR.Date, MPR.PlatformId, MPR.Gateway, MPR.Vertical , MPR.SoftwareName, MPR.ParentAccountId ,MPR.ParentName,
-	    MPR.FeePaymentType, MPR.PaymentTypeGroup
+			MPR.Date, MPR.PlatformId, MPR.Gateway, MPR.Vertical , MPR.SoftwareName, MPR.ParentAccountId ,MPR.ParentName,
+			MPR.FeePaymentType, MPR.PaymentTypeGroup
 )
--- insert into MPR
+insert into MPR (
 select
-	Date, PlatformId, Gateway, Vertical, SoftwareName , ParentAccountId, ParentName , 
+	Date, PlatformId, SoftwareName , Gateway, Vertical,ParentAccountId, ParentName , 
 	FeePaymentType, PaymentTypeGroup ,
-	sum(TPV_USD)::money as TPV_USD, (sum(TPV_USD) - sum(TPV_Net_USD))::money as Refunds_Chargebacks, sum(TPV_Net_USD)::money as TPV_Net_USD ,
+	sum(TPV_USD)::money as TPV_USD, (sum(TPV_USD) - sum(TPV_Net_USD))::money as "Refunds/Chargebacks", sum(TPV_Net_USD)::money as TPV_Net_USD ,
 	sum(Txn_Count)::int as Txn_Count, 	
 	sum(Revenue_Net_USD)::money as Revenue_Net_USD, sum(COGS_USD)::money as COGS_USD
 from
-	MPR_temp
+	MPR
 group by
-	Date, PlatformId, Gateway, Vertical, SoftwareName ,  ParentAccountId, ParentName , 
+	Date, PlatformId, SoftwareName , Gateway, Vertical, ParentAccountId, ParentName , 
 	FeePaymentType, PaymentTypeGroup 
-
-
+)

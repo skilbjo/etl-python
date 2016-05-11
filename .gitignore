@@ -1,7 +1,13 @@
 ## Ignore these files & directories
 .DS_Store
 
+# Directories
 lib/config/
 __pycache__
+csv/vantiv/files
+
+# Files
+sql/Costs/costs.sql
+sql/Financials/financials.sql
 
 
