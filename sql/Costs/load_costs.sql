@@ -1,5 +1,5 @@
 insert into costs (
-	Date, Vertical, Credit
+	Date, Vertical
 	) values (
-		%s,$s,%s
+		%s,$s
 	)
