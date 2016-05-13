@@ -28,7 +28,7 @@
 		51 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${FINANCIALS}financials.sql" -l "${FINANCIALS}load_financials.sql" >/dev/null		
 
 	## MPR // Merchant Profitability Report
-		51 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null
+		58 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null
 		05 12 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${MPR}mpr.sql" -l "${MPR}load_mpr.sql" >/dev/null
 
 	## Monthly Maintenance Fees

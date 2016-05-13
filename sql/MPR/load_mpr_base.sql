@@ -33,5 +33,5 @@ insert into mpr_base(
 	Debit_Card_Net_USD, 
 	Amex_Processing_Net_USD
 	) values (
-		%s,$s,%s,%s,%s,%s,%s,%s,%s,%s,%s,$s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
+		%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,$s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
 )
