@@ -7,6 +7,8 @@
 
 	ANALYTICS="/home/skilbjo/python/app/etl/sql/Analytics/"
 	MMF="/home/skilbjo/python/app/etl/sql/MMF/"
+	COSTS="/home/skilbjo/python/app/etl/sql/Costs/"	
+	FINANCIALS="/home/skilbjo/python/app/etl/sql/Financials/"		
 	MPR="/home/skilbjo/python/app/etl/sql/MPR/"	
 	TOPDATA="/home/skilbjo/python/app/etl/sql/TopData/"
 	EXTNRLGTWY="/home/skilbjo/python/app/etl/sql/ExtrnlGtwy/"	
@@ -14,18 +16,24 @@
 
 ##### Monthly #####
 	## Analytics
-		0 20 3 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
+		0 20 3 * * 		skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${ANALYTICS}analytics.sql" -l "${ANALYTICS}load_analytics.sql" >/dev/null
 
 	## TopData
-		0 20 3 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
+		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
 
-	## MPR
-		18 14 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null
-		0 11 8 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr.sql" -l "${MPR}load_mpr.sql" >/dev/null
+	## Costs
+		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${COSTS}costs.sql" -l "${COSTS}load_costs.sql" >/dev/null
 
-	## MMF
-		39 13 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
+	## Financials
+		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${FINANCIALS}financials.sql" -l "${FINANCIALS}load_financials.sql" >/dev/null		
+
+	## MPR // Merchant Profitability Report
+		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null
+		0 22 10 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr.sql" -l "${MPR}load_mpr.sql" >/dev/null
+
+	## Monthly Maintenance Fees
+		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MMF}mmf.sql" -l "${MMF}load_mmf.sql" >/dev/null
 
 	## External Gateway
-		12 11 6 * * skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${EXTNRLGTWY}extrnlgtwy.sql" -l "${EXTNRLGTWY}load_extrnlgtwy.sql" >/dev/null		
+		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${EXTNRLGTWY}extrnlgtwy.sql" -l "${EXTNRLGTWY}load_extrnlgtwy.sql" >/dev/null		
 

@@ -5,6 +5,7 @@
 lib/config/
 __pycache__
 csv/vantiv/files
+csv/property_paid/files
 
 # Files
 sql/Costs/costs.sql
