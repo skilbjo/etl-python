@@ -11,7 +11,6 @@ import load
 def main(server, sql_extract , sql_load ):
 	data = extract.extract(server, sql_extract )
 	data = transform.transform(data)
-	print(data)
 	return load.load( data, sql_load )
 
 if __name__ == '__main__':

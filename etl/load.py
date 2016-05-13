@@ -27,6 +27,7 @@ def finance_dm(data, sql_load):
 	cursor = conn.cursor()
 	print(sql_load,data)
 	cursor.executemany(sql_load, data)
+	# cursor.executemany(sql_load, data)
 	conn.close()
 
 	return 'Data inserted'
