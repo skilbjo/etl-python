@@ -1,5 +1,5 @@
 insert into costs (
-	Date, Vertical
+	Date, Vertical, Credit, Debit, Blend, Amex, ACH
 	) values (
-		%s,%s
+		%s,%s,%s,%s,%,s,%s,%s
 	)
