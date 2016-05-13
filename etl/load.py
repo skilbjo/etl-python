@@ -25,7 +25,7 @@ def finance_dm(data, sql_load):
 	conn.autocommit = True
 
 	cursor = conn.cursor()
-	print(sql_load)
+	print(sql_load,data)
 	cursor.executemany(sql_load, data)
 	conn.close()
 
