@@ -64,7 +64,7 @@ select isnull(txn.Year,billing.Year) Year, isnull(txn.Month,billing.Month) Month
 from
 	#txn txn
 	full outer  join #Billing billing	on	billing.Year = txn.Year and billing.Month = txn.Month and  billing.PlatformId = txn.PlatformId and billing.ParentAccountId = txn.ParentAccountId 
-		and txn.Currency in ('USD') and txn.Gateway_Type = 'YapProcessing'
+		and txn.Currency in ('USD') and txn.Gateway = 'YapProcessing'
 group by  isnull(txn.Year,billing.Year) , isnull(txn.Month,billing.Month) ,
 	cast(isnull(txn.Date, billing.Date ) as varchar) , isnull(txn.PlatformId,billing.PlatformId)  , isnull(txn.Gateway,'YapProcessing') , 
 	isnull(txn.Vertical,billing.Vertical) , coalesce(txn.SoftwareName,billing.SoftwareName,'Non-Affiliated')  ,isnull(txn.ParentAccountId,billing.ParentAccountId)  ,isnull(txn.ParentName,billing.ParentName)  ,

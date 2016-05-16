@@ -1,5 +1,11 @@
 Sometimes there are problems, here are the manual command line commands to load the tables
 
+1. change environment
+workon etl ; cd ~ ; cd python/app/etl
+
+
+2. run this code
+
 ## Analytics
 	python etl.py -s crostoli -e sql/Analytics/analytics.sql -l sql/Analytics/load_analytics.sql
 
