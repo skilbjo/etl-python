@@ -14,7 +14,7 @@ Initial_COGS as (
 		) Initial_COGS
 	from
 		mpr_base MPR
-		left join Costs on Costs.Vertical = MPR.Vertical and MPR.Gateway in ('YapProcessing') and MPR.PaymentTypeGroup not in ('Cash')
+		left join Costs on Costs.Vertical = MPR.Vertical and MPR.Gateway in ('YapProcessing') and MPR.PaymentTypeGroup not in ('Cash') and Costs.Date = MPR.Date
 		left join Financials_Base Financials on MPR.Date = Financials.Date and MPR.Gateway in ('YapProcessing') and MPR.PaymentTypeGroup in ('Card')
 	where MPR.Gateway in ('YapProcessing') and MPR.Vertical not in ('HA-Intl') and MPR.PaymentTypeGroup not in ('Cash')
 	group by
@@ -46,7 +46,7 @@ MPR as (
 		sum(Txn_Count) Txn_Count
 	from
 		mpr_base MPR
-		left join Costs on Costs.Vertical = MPR.Vertical and MPR.Gateway in ('YapProcessing') and MPR.PaymentTypeGroup not in ('Cash')
+		left join Costs on Costs.Vertical = MPR.Vertical and MPR.Gateway in ('YapProcessing') and MPR.PaymentTypeGroup not in ('Cash') and Costs.Date = MPR.Date
 		left join COGS_Financials on MPR.Date = COGS_Financials.Date and MPR.Gateway in ('YapProcessing') and MPR.PaymentTypeGroup in ('Card','AmEx-Processing')
 	where
 		MPR.Date in ( select StartDate from Date ) 
