@@ -6,13 +6,10 @@
 	APP="/home/skilbjo/python/app/etl"
 
 	ANALYTICS="/home/skilbjo/python/app/etl/sql/Analytics/"
-	MMF="/home/skilbjo/python/app/etl/sql/MMF/"
-	COSTS="/home/skilbjo/python/app/etl/sql/Costs/"	
-	FINANCIALS="/home/skilbjo/python/app/etl/sql/Financials/"		
+	MMF="/home/skilbjo/python/app/etl/sql/MMF/"	
 	MPR="/home/skilbjo/python/app/etl/sql/MPR/"	
 	TOPDATA="/home/skilbjo/python/app/etl/sql/TopData/"
 	EXTNRLGTWY="/home/skilbjo/python/app/etl/sql/ExtrnlGtwy/"	
-
 
 ##### Monthly #####
 	## Analytics
@@ -22,12 +19,14 @@
 		45 11 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${TOPDATA}top_data.sql" -l "${TOPDATA}load_top_data.sql" >/dev/null
 
 	## Costs
-		51 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${COSTS}costs.sql" -l "${COSTS}load_costs.sql" >/dev/null
 
 	## Financials
-		51 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${FINANCIALS}financials.sql" -l "${FINANCIALS}load_financials.sql" >/dev/null		
 
 	## MPR // Merchant Profitability Report
+		51 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${MPR}costs.sql" -l "${MPR}load_costs.sql" >/dev/null
+		51 15 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${MPR}financials.sql" -l "${MPR}load_financials.sql" >/dev/null		
+
+
 		04 16 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null
 		59 16 13 * * 	skilbjo source $ACTIVATE ; cd $APP ; python etl.py -s finance_dm -e "${MPR}mpr.sql" -l "${MPR}load_mpr.sql" >/dev/null
 

@@ -1,0 +1,23 @@
+Sometimes there are problems, here are the manual command line commands to load the tables
+
+## Analytics
+	python etl.py -s crostoli -e sql/Analytics/analytics.sql -l sql/Analytics/load_analytics.sql
+
+## TopData
+	python etl.py -s crostoli -e sql/TopData/top_data.sql -l sql/TopData/load_top_data.sql
+	
+## Costs
+	python etl.py -s yapdm_finance -e sql/Costs/top_data.sql -l sql/TopData/load_top_data.sql
+
+## Financials
+	python etl.py -s yapdm_finance -e sql/TopData/top_data.sql -l sql/TopData/load_top_data.sql
+
+
+## MPR // Merchant Profitability Report
+	python etl.py -s crostoli -e sql/MPR/mpr_base.sql -l sql/MPR/load_mpr_base.sql
+	python etl.py -s yapdm_finance -e sql/MPR/mpr.sql -l sql/MPR/load_mpr.sql
+
+## Monthly Maintenance Fees
+
+## External Gateway
+	python etl.py -s crostoli -e sql/ExternalGateway/external_gateway.sql -l sql/ExternalGateway/load_external_gateway.sql

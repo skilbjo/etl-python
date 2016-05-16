@@ -1,0 +1,33 @@
+##### VARIABLES #####
+	PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/skilbjo/.local/bin:/home/skilbjo/bin
+	ACTIVATE="/home/skilbjo/.virtualenvs/etl/bin/activate"
+	MAILTO=jskilbeck@yapstone.com
+
+	APP="/home/skilbjo/python/app/etl"
+
+	ANALYTICS="/home/skilbjo/python/app/etl/sql/Analytics/"
+	MMF="/home/skilbjo/python/app/etl/sql/MMF/"
+	COSTS="/home/skilbjo/python/app/etl/sql/Costs/"	
+	FINANCIALS="/home/skilbjo/python/app/etl/sql/Financials/"		
+	MPR="/home/skilbjo/python/app/etl/sql/MPR/"	
+	TOPDATA="/home/skilbjo/python/app/etl/sql/TopData/"
+	EXTNRLGTWY="/home/skilbjo/python/app/etl/sql/ExtrnlGtwy/"
+	eenv="source $ACTIVATE ; cd $APP"
+
+##### JOBS ######
+
+	## MPR ##
+	cost_script='eval eenv; python etl.py -s finance_dm -e "${COSTS}costs.sql" -l "${COSTS}load_costs.sql" >/dev/null'
+	financials_script='eval eenv; python etl.py -s finance_dm -e "${FINANCIALS}financials.sql" -l "${FINANCIALS}load_financials.sql" >/dev/null'
+	mpr_base_script='eval eenv; python etl.py -s crostoli -e "${MPR}mpr_base.sql" -l "${MPR}load_mpr_base.sql" >/dev/null'
+	mpr_script='eval eenv; python etl.py -s finance_dm -e "${MPR}mpr.sql" -l "${MPR}load_mpr.sql" >/dev/null'
+
+
+##### CRONs #####
+	## MPR // Merchant Profitability Report
+		41 11 13 * * skilbjo (eval $cost_script & eval $financials_script) && (eval $mpr_base_script && eval $mpr_script)
+
+	## Monthly Maintenance Fees
+	## External Gateway
+	## Analytics
+	## TopData		

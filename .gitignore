@@ -8,7 +8,7 @@ csv/vantiv/files
 csv/property_paid/files
 
 # Files
-sql/Costs/costs.sql
-sql/Financials/financials.sql
+sql/MPR/costs.sql
+sql/MPR/financials.sql
 
 
