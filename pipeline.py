@@ -22,8 +22,6 @@ if __name__ == '__main__':
 
 
 '''
-
-
 create table vantiv (
 	Chain varchar,
 	Merchant_Id varchar,
@@ -37,9 +35,6 @@ create table vantiv (
 	Surcharge decimal(48,2),
 	Txn_Id varchar
 )
-
-
-
 '''
 
 

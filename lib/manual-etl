@@ -13,15 +13,15 @@ workon etl ; cd ~ ; cd python/app/etl
 	python etl.py -s crostoli -e sql/TopData/top_data.sql -l sql/TopData/load_top_data.sql
 	
 ## Costs
-	python etl.py -s yapdm_finance -e sql/Costs/top_data.sql -l sql/TopData/load_top_data.sql
+	python etl.py -s finance_dm -e sql/MPR/costs.sql -l sql/MPR/load_costs.sql
 
 ## Financials
-	python etl.py -s yapdm_finance -e sql/TopData/top_data.sql -l sql/TopData/load_top_data.sql
+	python etl.py -s finance_dm -e sql/MPR/financials.sql -l sql/MPR/load_financials.sql
 
 
 ## MPR // Merchant Profitability Report
 	python etl.py -s crostoli -e sql/MPR/mpr_base.sql -l sql/MPR/load_mpr_base.sql
-	python etl.py -s yapdm_finance -e sql/MPR/mpr.sql -l sql/MPR/load_mpr.sql
+	python etl.py -s finance_dm -e sql/MPR/mpr.sql -l sql/MPR/load_mpr.sql
 
 ## Monthly Maintenance Fees
 
