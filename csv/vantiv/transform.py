@@ -1,5 +1,5 @@
 import petl as etl
-import configparser
+
 import psycopg2
 config = configparser.ConfigParser()
 config.read('./../../lib/config/config')

@@ -1,6 +1,7 @@
 Sometimes there are problems, here are the manual command line commands to load the tables
 
 1. change environment
+
 workon etl ; cd ~ ; cd python/app/etl
 
 

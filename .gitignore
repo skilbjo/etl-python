@@ -10,5 +10,5 @@ csv/property_paid/files
 # Files
 sql/MPR/costs.sql
 sql/MPR/financials.sql
-
+sql/MPR/commissions.sql
 
