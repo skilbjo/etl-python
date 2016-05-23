@@ -21,6 +21,8 @@ workon etl ; cd ~ ; cd python/app/etl
 
 
 ## MPR // Merchant Profitability Report
+	python etl.py -s crostoli -e sql/MPR/aggregate_volume.sql -l sql/MPR/load_aggregate_volume.sql
+
 	python etl.py -s crostoli -e sql/MPR/mpr_base.sql -l sql/MPR/load_mpr_base.sql
 	python etl.py -s finance_dm -e sql/MPR/mpr.sql -l sql/MPR/load_mpr.sql
 
