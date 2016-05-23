@@ -38,7 +38,7 @@ if object_id('tempdb..#Query') is not null drop table #Query
 select * into #Query from (
 	select
 		cast(cast(dateadd(d,  0, dateadd(d, -1 , dateadd(mm, (year(txn.PostDate_r) - 1900) * 12 + month(txn.PostDate_r) , 0))) as date) as varchar) as Date,
-		txn.PlatformId , c.ParentAccountId, c.ParentName ,
+		txn.PlatformId , c.ParentAccountId, c.ParentName , c.DateFirstSeen ,
 		case	when txn.ProcessorId = 14 then 'GatewayOnly' else 'YapProcessing' end as Gateway,
 		case when abs(txn.AmtNetConvFee) = 0 then 'PropertyPaid' when abs(txn.AmtNetConvFee) <> 0 then 'ConvFee' end as FeePaymentType ,
 		i.CardType IssuerType, 
@@ -57,7 +57,7 @@ select * into #Query from (
 		and txn.ProcessorId not in (16)
 	group by
 		cast(cast(dateadd(d,  0, dateadd(d, -1 , dateadd(mm, (year(txn.PostDate_r) - 1900) * 12 + month(txn.PostDate_r) , 0))) as date) as varchar),
-		txn.PlatformId , c.ParentAccountId , c.ParentName,
+		txn.PlatformId , c.ParentAccountId , c.ParentName, c.DateFirstSeen ,
 		case	when txn.ProcessorId = 14 then 'GatewayOnly' else 'YapProcessing' end ,
 		case when abs(txn.AmtNetConvFee) = 0 then 'PropertyPaid' when abs(txn.AmtNetConvFee) <> 0 then 'ConvFee' end  ,
 		i.CardType , 
