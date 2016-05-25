@@ -3,8 +3,8 @@ declare @now as date, @start as date, @end as date,
 @PaymentTypeGroup as nvarchar(max) 
 
 set @now = getdate()
-set @start = dateadd(mm,(year(@now)- 1900) * 12 + month(@now) - 1 -1 , 0) 
-set @end = dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))  
+set @start = '2014-01-01'--dateadd(mm,(year(@now)- 1900) * 12 + month(@now) - 1 -1 , 0) 
+set @end = '2016-03-31'--dateadd(d,-1 , dateadd(mm,(year(@now)- 1900) * 12 + month(@now)- 1 , 0))  
 
 -- Temp Tables
 if object_id('tempdb..#PaymentTypeGroup') is not null drop table #PaymentTypeGroup
